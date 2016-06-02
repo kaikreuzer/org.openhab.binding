@@ -1,0 +1,26 @@
+-plugin.mvn = \
+	aQute.bnd.repository.maven.provider.MavenBndRepository; \
+		snapshotUrl=http://repo2.maven.org/maven2/; \
+		releaseUrl=http://repo2.maven.org/maven2/; \
+		index=${.}/central.maven; \
+		name="Central"
+		
+-plugin.rel = \
+	aQute.bnd.repository.maven.provider.MavenBndRepository; \
+		snapshotUrl="${fileuri;${.}/testrepo}"; \
+		releaseUrl="${fileuri;${.}/testrepo}"; \
+		index=${.}/rel.maven; \
+		name="Rel"
+		
+-pom: true
+
+-groupid: org.openhab
+
+-releaserepo: Rel
+
+-buildpath.openhab:\
+	slf4j.api,\
+	osgi.core,\
+	org.osgi.service.component.annotations,\
+	osgi.annotation
+	

@@ -3,12 +3,12 @@
 #
 
 #
-# The remote repo with all OpenHAB deps
+# The remote repo with all openHAB deps
 #
 
 -plugin.openhab = \
 	aQute.bnd.deployer.repository.FixedIndexedRepo; \
-	        name		=       OpenHab; \
+	        name		=       openHAB; \
 	        locations	=       http://openhab2.s3-website-us-east-1.amazonaws.com/index.xml.gz
 	        
 
@@ -50,8 +50,8 @@ releaserepo:            ${workspace}/cnf/bundles
 #
  
 Bundle-Version: 		2.0.0.${tstamp}
-Bundle-Vendor:			Eclipse Foundation
-Bundle-Copyright:		(c) OpenHAB and others, ${tstamp;YYYY} All Rights Reserved
+Bundle-Vendor:			openHAB.org
+Bundle-Copyright:		(c) openHAB and others, ${tstamp;YYYY} All Rights Reserved
 Bundle-DocURL:			http://www.openhab.org/
 Bundle-License:         https://opensource.org/licenses/EPL-1.0; \
                         description="Eclipse Public License - v 1.0"; \
