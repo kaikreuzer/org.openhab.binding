@@ -1,70 +1,15 @@
 #
-# OpenHAB Bindings
-#
-
-#
-# The remote repo with all openHAB deps
-#
-
--plugin.openhab = \
-	aQute.bnd.deployer.repository.FixedIndexedRepo; \
-	        name		=       openHAB; \
-	        locations	=       http://openhab2.s3-website-us-east-1.amazonaws.com/index.xml.gz
-	        
-
-
-#
-# Override the OSGi enRoute release repo with a Maven repository
-#
-
-releaserepo:            ${workspace}/cnf/bundles
-
-
--plugin.9.Release: \
-\
-    aQute.bnd.repository.maven.provider.MavenBndRepository; \
-        name='Release';\
-        releaseUrl="${fileuri;${releaserepo}}";\
-        snapshotUrl="${fileuri;${releaserepo}}",\
-
--releaserepo: Release
-
-#
 # Always include anything in the './cnf/add' folder
 #
 
 -includeresource.about: \
-	${build}/add, \
-	README.md
+	${build}/add
 
+-plugin.rel = \
+	aQute.bnd.repository.maven.provider.MavenBndRepository; \
+		snapshotUrl="${fileuri;${.}/release}"; \
+		releaseUrl="${fileuri;${.}/release}"; \
+		index=${.}/release/rel.mvn; \
+		name="Rel"
 
-#
-# Set the maven options
-#
- 
--groupid:               org.openhab.addons.binding
--pom:                   version=${versionmask;===;${@version}}-SNAPSHOT
-
-#
-# We have an overall version number
-#
- 
-Bundle-Version: 		2.0.0.${tstamp}
-Bundle-Vendor:			openHAB.org
-Bundle-Copyright:		(c) openHAB and others, ${tstamp;YYYY} All Rights Reserved
-Bundle-DocURL:			http://www.openhab.org/
-Bundle-License:         https://opensource.org/licenses/EPL-1.0; \
-                        description="Eclipse Public License - v 1.0"; \
-                        link=LICENSE
-
-# 
-# Support for lib directories. The macros 
-# calculate the jars in the lib dir, and then place
-# them appropriately on the buildpath or classpath or include resource
-#
-
-jars = ${lsr;lib;*.jar}
-lib.include: ${replace;${jars};.+;lib/$0=lib/$0}
-lib.buildpath: ${replace;${jars};.+;lib/$0\\;version=file\\;packages=*}
-lib.classpath: .,${replace;${jars};.+;lib/$0}
-
+-releaserepo: Rel

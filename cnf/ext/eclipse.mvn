@@ -1,0 +1,4 @@
+org.eclipse.smarthome.core:org.eclipse.smarthome.core:0.9.0-SNAPSHOT
+org.eclipse.smarthome.core:org.eclipse.smarthome.core.thing:0.9.0-SNAPSHOT
+org.eclipse.smarthome.config:org.eclipse.smarthome.config.core:0.9.0-SNAPSHOT
+org.eclipse.smarthome.config:org.eclipse.smarthome.config.discovery:0.9.0-SNAPSHOT

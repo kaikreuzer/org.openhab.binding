@@ -1,26 +1,55 @@
--plugin.mvn = \
+-plugin.mvncentral = \
 	aQute.bnd.repository.maven.provider.MavenBndRepository; \
 		snapshotUrl=http://repo2.maven.org/maven2/; \
 		releaseUrl=http://repo2.maven.org/maven2/; \
-		index=${.}/central.maven; \
+		index=${.}/central.mvn; \
 		name="Central"
-		
--plugin.rel = \
+
+-plugin.mvneclipse = \
 	aQute.bnd.repository.maven.provider.MavenBndRepository; \
-		snapshotUrl="${fileuri;${.}/testrepo}"; \
-		releaseUrl="${fileuri;${.}/testrepo}"; \
-		index=${.}/rel.maven; \
-		name="Rel"
+		snapshotUrl=https://repo.eclipse.org/content/repositories/smarthome-snapshots; \
+		releaseUrl=https://repo.eclipse.org/content/repositories/smarthome-releases; \
+		index=${.}/eclipse.mvn; \
+		name="Eclipse"
 		
--pom: true
+-plugin.Local: \
+        aQute.bnd.deployer.repository.LocalIndexedRepo; \
+            name                =       Local ; \
+            pretty              =       true ; \
+            local               =       ${build}/local
 
--groupid: org.openhab
+-plugin.Local: \
+    aQute.bnd.repository.maven.provider.MavenBndRepository; \
+		name				=	Local
+		            		
+-buildrepo: Local
 
--releaserepo: Rel
-
+-pom: \
+	groupid	=	org.openhab,\
+	version =	${versionmask;===;${@version}}-SNAPSHOT
+	
 -buildpath.openhab:\
-	slf4j.api,\
 	osgi.core,\
 	org.osgi.service.component.annotations,\
-	osgi.annotation
+	osgi.annotation,\
+	slf4j.api,\
+	org.apache.commons.lang,\
+	com.google.guava:guava,\
+	com.google.gson,\
+	org.mockito.mockito-all,\
+	junit:junit,\
+	org.eclipse.smarthome.core.thing,\
+	org.eclipse.smarthome.core,\
+	org.eclipse.smarthome.config.core,\
+	org.eclipse.smarthome.config.discovery
+
+-includeresource: \
+	{ESH-INF=ESH-INF}			
 	
+Bundle-Version: 		2.0.0.${tstamp}
+Bundle-Vendor:			openHAB.org
+Bundle-Copyright:		(c) openHAB Community, ${tstamp;YYYY} All Rights Reserved
+Bundle-DocURL:			http://www.openhab.org/
+Bundle-License:         https://opensource.org/licenses/EPL-1.0; \
+                        description="Eclipse Public License - v 1.0"; \
+                        link=LICENSE
